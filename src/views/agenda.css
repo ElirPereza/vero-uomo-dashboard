@@ -1,0 +1,129 @@
+/* Agenda */
+
+.seg-control {
+  display: inline-flex;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg-elev);
+  padding: 2px;
+}
+.seg-control button {
+  appearance: none; border: 0; background: transparent;
+  font-family: inherit; font-size: var(--fs-xs); font-weight: 500;
+  color: var(--fg-soft); cursor: pointer;
+  padding: 4px 12px;
+  border-radius: 4px;
+}
+.seg-control button.is-active { background: var(--fg); color: var(--bg); }
+
+.cal { --ev-mix: 18%; }
+[data-dark="1"] .cal { --ev-mix: 32%; }
+
+.cal {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-elev);
+  display: flex; flex-direction: column;
+  height: calc(100vh - 200px);
+}
+.cal-hd {
+  display: grid;
+  grid-template-columns: 56px repeat(7, 1fr);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.cal-corner { border-right: 1px solid var(--border); }
+.cal-daycol-hd {
+  padding: 8px 12px;
+  border-right: 1px solid var(--border);
+  text-align: left;
+  display: flex; flex-direction: column; gap: 0;
+}
+.cal-daycol-hd:last-child { border-right: 0; }
+.cal-daycol-hd.is-today { background: var(--accent-weak); }
+.cal-daycol-hd.is-today .text-lg { color: var(--accent); }
+
+.cal-body {
+  display: grid;
+  grid-template-columns: 56px repeat(7, 1fr);
+  overflow-y: auto;
+  position: relative;
+  flex: 1;
+  min-height: 0;
+}
+.cal-hours { display: flex; flex-direction: column; border-right: 1px solid var(--border); }
+.cal-hour-row {
+  height: 64px;
+  position: relative;
+  padding: 4px 6px;
+}
+.cal-hour-lbl {
+  font-size: var(--fs-xxs); color: var(--fg-muted);
+  position: relative; top: -7px;
+}
+.cal-daycol {
+  position: relative;
+  border-right: 1px solid var(--border);
+}
+.cal-daycol:last-child { border-right: 0; }
+.cal-daycol.is-today { background: linear-gradient(to bottom, var(--accent-weak), transparent 40%); }
+.cal-slot {
+  height: 64px;
+  border-bottom: 1px solid var(--border);
+}
+.cal-slot:nth-child(odd) { border-bottom-color: rgba(0,0,0,.04); }
+[data-dark="1"] .cal-slot:nth-child(odd) { border-bottom-color: rgba(255,255,255,.03); }
+
+.cal-ev {
+  position: absolute;
+  left: 3px; right: 3px;
+  border-radius: var(--radius-sm);
+  padding: 4px 7px 4px 6px;
+  font-size: 11px;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex; flex-direction: column;
+  gap: 1px;
+  min-width: 0;
+  line-height: 1.25;
+}
+.cal-ev:hover { box-shadow: 0 6px 14px -4px rgba(0,0,0,.18); }
+.cal-ev-line1 {
+  display: flex; align-items: baseline; gap: 6px;
+  min-width: 0;
+}
+.cal-ev-time {
+  font-weight: 600; font-size: 10px; color: var(--fg);
+  opacity: .75; flex-shrink: 0;
+}
+.cal-ev-cli {
+  font-weight: 500; color: var(--fg); font-size: 11px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0;
+}
+.cal-ev-sv {
+  color: var(--fg-soft); font-size: 10px;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  display: flex; align-items: center; gap: 4px;
+}
+.cal-ev-ia {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--agent);
+  color: #fff;
+  flex-shrink: 0;
+}
+.cal-ev[data-tiny="1"] .cal-ev-sv { display: none; }
+
+.cal-nowline {
+  position: absolute;
+  left: 0; right: 0;
+  height: 1.5px;
+  background: var(--accent);
+  z-index: 4;
+  pointer-events: none;
+}
+.cal-nowline::before {
+  content: ""; position: absolute; left: -4px; top: -3px;
+  width: 8px; height: 8px; border-radius: 50%; background: var(--accent);
+}

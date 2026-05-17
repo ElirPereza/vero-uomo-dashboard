@@ -1,0 +1,138 @@
+/* Hoy view specifics */
+
+.hoy-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 340px;
+  gap: var(--gap-4);
+  margin-top: var(--gap-4);
+  align-items: start;
+}
+@media (max-width: 1280px) {
+  .hoy-split { grid-template-columns: minmax(0, 1fr); }
+  .hoy-side { display: grid; grid-template-columns: 1fr 1fr; gap: var(--gap-4); }
+}
+.hoy-main, .hoy-side { display: flex; flex-direction: column; gap: var(--gap-4); min-width: 0; }
+
+.legend {
+  display: flex; gap: 12px; font-size: var(--fs-xxs); color: var(--fg-muted); align-items: center;
+}
+.legend span { display: inline-flex; align-items: center; gap: 5px; }
+.legend i { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+
+.filter-chips { display: flex; gap: 4px; flex-wrap: wrap; }
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  height: 24px; padding: 0 9px;
+  border: 1px solid var(--border);
+  background: transparent;
+  border-radius: var(--radius-pill);
+  font-size: var(--fs-xxs); font-weight: 500;
+  color: var(--fg-soft);
+  cursor: pointer;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+.chip:hover { background: var(--bg-hover); }
+.chip.is-active { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.chip > .chip-dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+
+/* Timeline */
+.hoy-timeline { padding: 4px 0 12px; }
+.hoy-hour {
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  align-items: stretch;
+  padding: 6px 16px 6px 0;
+}
+.hoy-hour-label {
+  font-size: var(--fs-xs); font-weight: 600;
+  color: var(--fg-muted);
+  letter-spacing: .02em;
+  padding: 10px 0 0 16px;
+}
+.hoy-hour-body { display: flex; flex-direction: column; }
+
+.hoy-row {
+  display: grid;
+  grid-template-columns: 64px 16px 1fr auto;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px 8px 8px 0;
+  border-radius: var(--radius-sm);
+  position: relative;
+}
+.hoy-row:hover { background: var(--bg-hover); }
+.hoy-row[data-state="completo"] .hoy-row-time,
+.hoy-row[data-state="completo"] .hoy-row-main { opacity: .55; }
+.hoy-row[data-state="en-curso"] {
+  background: linear-gradient(90deg, var(--accent-weak), transparent 30%);
+}
+.hoy-row[data-state="en-curso"]::before {
+  content: ""; position: absolute; left: 0; top: 4px; bottom: 4px; width: 2px;
+  background: var(--accent); border-radius: 2px;
+}
+.hoy-row-time {
+  display: flex; flex-direction: column; align-items: flex-start;
+  font-size: var(--fs-sm); font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  padding-top: 1px;
+  padding-left: 4px;
+}
+.hoy-row-rail {
+  display: flex; justify-content: center; padding-top: 6px;
+}
+.hoy-row-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.hoy-row-main { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.hoy-row-ainote {
+  margin-top: 4px;
+  font-size: var(--fs-xxs);
+  color: var(--agent);
+  background: var(--agent-weak);
+  border-radius: var(--radius-sm);
+  padding: 3px 7px;
+  display: inline-block;
+  align-self: flex-start;
+}
+[data-dark="1"] .hoy-row-ainote {
+  color: color-mix(in oklab, var(--agent), white 50%);
+  background: color-mix(in oklab, var(--agent), transparent 78%);
+}
+.hoy-row-price {
+  font-size: var(--fs-sm);
+  padding-top: 2px;
+  font-weight: 500;
+}
+
+/* Activity feed */
+.feed { display: flex; flex-direction: column; gap: 12px; }
+.feed-item { display: flex; gap: 10px; align-items: flex-start; }
+.feed-dot { width: 6px; height: 6px; border-radius: 50%; margin-top: 7px; flex-shrink: 0; }
+
+/* Alerts inside Hoy side */
+.alert-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 8px 10px;
+  border-radius: var(--radius-sm);
+}
+.alert-row:hover { background: var(--bg-hover); }
+.alert-icon {
+  display: flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; border-radius: var(--radius-sm);
+  background: var(--bg-soft);
+  flex-shrink: 0;
+}
+
+/* Team rows */
+.team-row {
+  display: flex; gap: 10px; align-items: center;
+  padding: 10px 16px;
+}
+.team-row + .team-row { border-top: 1px solid var(--border); }
+.team-bar {
+  height: 3px; background: var(--bg-soft); border-radius: 2px; margin-top: 4px;
+  overflow: hidden;
+}
+.team-bar span { display: block; height: 100%; border-radius: 2px; transition: width .3s; }

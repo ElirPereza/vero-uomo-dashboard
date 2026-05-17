@@ -1,0 +1,86 @@
+/* Config */
+
+.cfg-tabs {
+  display: flex; gap: 2px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.cfg-tab {
+  appearance: none; border: 0; background: transparent;
+  font-family: inherit; font-size: var(--fs-sm); font-weight: 500;
+  color: var(--fg-soft);
+  padding: 8px 14px;
+  cursor: pointer;
+  position: relative;
+  border-radius: 6px 6px 0 0;
+}
+.cfg-tab:hover { color: var(--fg); background: var(--bg-hover); }
+.cfg-tab.is-active {
+  color: var(--fg);
+}
+.cfg-tab.is-active::after {
+  content: ""; position: absolute; left: 8px; right: 8px; bottom: -1px;
+  height: 2px; background: var(--accent); border-radius: 2px;
+}
+
+.cfg-rows { display: flex; flex-direction: column; }
+.cfg-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 16px;
+  align-items: center;
+  padding: 12px 16px;
+  border-top: 1px solid var(--border);
+}
+.cfg-row:first-child { border-top: 0; }
+.cfg-row-lbl { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.cfg-row-ctrl { display: flex; align-items: center; gap: 8px; }
+
+.switch {
+  width: 32px; height: 18px;
+  border: 0; border-radius: 999px;
+  background: var(--fg-faint);
+  padding: 0; cursor: pointer;
+  position: relative;
+}
+.switch.on { background: var(--accent); }
+.switch i {
+  position: absolute; top: 2px; left: 2px;
+  width: 14px; height: 14px;
+  background: #fff; border-radius: 50%;
+  box-shadow: 0 1px 2px rgba(0,0,0,.2);
+  transition: transform .15s;
+}
+.switch.on i { transform: translateX(14px); }
+
+.input, .select {
+  appearance: none;
+  height: 30px; padding: 0 10px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--fg);
+  border-radius: var(--radius-sm);
+  font: inherit;
+  font-size: var(--fs-sm);
+  min-width: 220px;
+  outline: none;
+}
+.input:focus, .select:focus { border-color: var(--accent); }
+.select {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'><path fill='%2371717a' d='M0 0h10L5 6z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  padding-right: 28px;
+}
+
+.cfg-tag-list { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.svc-ic {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-soft);
+  color: var(--fg-soft);
+  flex-shrink: 0;
+}
