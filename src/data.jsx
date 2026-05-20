@@ -2,11 +2,14 @@
 
 export const FMT_UYU = (n) => '$' + Math.round(n).toLocaleString('es-UY');
 
+// Modelo: cada barbero alquila el espacio. La barbería retiene 60% de la facturación
+// como arrendamiento; el barbero se queda con el 40% restante.
+// Mati es dueño (no paga arrendamiento, fija su propio %).
 export const BARBEROS = [
-  { id: 'mati',  nombre: 'Matías',   apodo: 'Mati',   color: '#0EA5E9', inicial: 'MR', rol: 'Senior · Fundador' },
-  { id: 'seba',  nombre: 'Sebastián',apodo: 'Seba',   color: '#F59E0B', inicial: 'SP', rol: 'Senior' },
-  { id: 'nico',  nombre: 'Nicolás',  apodo: 'Nico',   color: '#10B981', inicial: 'NM', rol: 'Junior' },
-  { id: 'leo',   nombre: 'Leonardo', apodo: 'Leo',    color: '#EF4444', inicial: 'LF', rol: 'Senior' },
+  { id: 'mati',  nombre: 'Matías',   apodo: 'Mati',   color: '#0EA5E9', inicial: 'MR', rol: 'Senior · Fundador', arrend: 0   },
+  { id: 'seba',  nombre: 'Sebastián',apodo: 'Seba',   color: '#F59E0B', inicial: 'SP', rol: 'Senior',           arrend: 60 },
+  { id: 'nico',  nombre: 'Nicolás',  apodo: 'Nico',   color: '#10B981', inicial: 'NM', rol: 'Junior',           arrend: 60 },
+  { id: 'leo',   nombre: 'Leonardo', apodo: 'Leo',    color: '#EF4444', inicial: 'LF', rol: 'Senior',           arrend: 60 },
 ];
 
 export const SERVICIOS = [
@@ -218,4 +221,114 @@ export const ACTIVIDAD_AGENTE = [
 export const ALERTAS_HOY = [
   { tipo: 'hueco',   texto: 'Hueco de 30 min a las 13:00 con Seba', accion: 'Ofrecer a lista de espera (2)' },
   { tipo: 'noshow',  texto: '2 turnos sin confirmar para hoy', accion: 'Reenviar recordatorios' },
+];
+
+// ── Cuponeras (paquetes prepagos: ej. 12 cortes al precio de 10) ───────
+export const CUPONERAS = [
+  {
+    id: 'cup-corte-12-10',
+    nombre: 'Pack 12 cortes',
+    servicio: 'Corte clásico',
+    incluye: 12, paga: 10,
+    precioPack: 7500, precioUnit: 750, ahorro: 1500,
+    activo: true,
+    vendidas: 34, usados: 187, restantes: 221,
+  },
+  {
+    id: 'cup-fade-8-6',
+    nombre: 'Pack 8 fades',
+    servicio: 'Fade premium',
+    incluye: 8, paga: 6,
+    precioPack: 5700, precioUnit: 950, ahorro: 1900,
+    activo: true,
+    vendidas: 22, usados: 96, restantes: 80,
+  },
+  {
+    id: 'cup-pareja',
+    nombre: 'Combo amigos',
+    servicio: 'Corte + barba (x2 personas)',
+    incluye: 2, paga: 2,
+    precioPack: 1900, precioUnit: 1100, ahorro: 300,
+    activo: true,
+    vendidas: 18, usados: 36, restantes: 0,
+  },
+  {
+    id: 'cup-barba-10-8',
+    nombre: 'Pack 10 barbas',
+    servicio: 'Diseño de barba',
+    incluye: 10, paga: 8,
+    precioPack: 4400, precioUnit: 550, ahorro: 1100,
+    activo: false,
+    vendidas: 7, usados: 38, restantes: 32,
+  },
+];
+
+// Clientes con cuponera activa (sample)
+export const CUPONERAS_CLIENTES = [
+  { cliente: 'Joaquín Pereira',   pack: 'Pack 12 cortes',  usados: 7, total: 12, vence: '15 oct 2026' },
+  { cliente: 'Rodrigo Silveira',  pack: 'Pack 8 fades',    usados: 4, total: 8,  vence: '02 ago 2026' },
+  { cliente: 'Federico Méndez',   pack: 'Pack 12 cortes',  usados: 9, total: 12, vence: '20 jul 2026' },
+  { cliente: 'Martín Olivera',    pack: 'Pack 12 cortes',  usados: 3, total: 12, vence: '11 nov 2026' },
+  { cliente: 'Andrés Bermúdez',   pack: 'Pack 8 fades',    usados: 7, total: 8,  vence: '28 jun 2026' },
+];
+
+// ── Marketing — campañas, leads, reseñas ───────────────────────────────
+export const CAMPANIAS = [
+  {
+    id: 'cmp1', nombre: 'Fade premium · audiencia local',
+    plataforma: 'meta',
+    estado: 'activa',
+    inversion: 8400, gasto: 5230,
+    impresiones: 48200, clicks: 1840, leads: 42, turnos: 18,
+    cpa: 290,
+    desde: '02 may', hasta: '31 may',
+  },
+  {
+    id: 'cmp2', nombre: 'Promo sábados · Pocitos',
+    plataforma: 'google',
+    estado: 'activa',
+    inversion: 6000, gasto: 4720,
+    impresiones: 22100, clicks: 980, leads: 31, turnos: 14,
+    cpa: 337,
+    desde: '01 may', hasta: '31 may',
+  },
+  {
+    id: 'cmp3', nombre: 'Reactivación · clientes inactivos',
+    plataforma: 'meta',
+    estado: 'activa',
+    inversion: 2500, gasto: 1380,
+    impresiones: 9200, clicks: 410, leads: 28, turnos: 21,
+    cpa: 66,
+    desde: '08 may', hasta: '22 may',
+  },
+  {
+    id: 'cmp4', nombre: 'Lanzamiento cuponeras',
+    plataforma: 'meta',
+    estado: 'pausada',
+    inversion: 4000, gasto: 3120,
+    impresiones: 19800, clicks: 720, leads: 16, turnos: 8,
+    cpa: 390,
+    desde: '15 abr', hasta: '30 abr',
+  },
+];
+
+// Leads recientes desde campañas
+export const LEADS_MARKETING = [
+  { nombre: 'Bruno Tabárez',    fuente: 'meta',   campaign: 'Fade premium', estado: 'agendó',    hora: 'hoy 02:17' },
+  { nombre: 'Ezequiel Curbelo', fuente: 'google', campaign: 'Promo sábados', estado: 'agendó',    hora: 'hoy 09:14' },
+  { nombre: 'Pablo Acosta',     fuente: 'meta',   campaign: 'Reactivación',  estado: 'agendó',    hora: 'hoy 08:02' },
+  { nombre: 'Felipe Martínez',  fuente: 'google', campaign: 'Promo sábados', estado: 'respondió', hora: 'hoy 10:31' },
+  { nombre: 'Ignacio Ramos',    fuente: 'meta',   campaign: 'Fade premium', estado: 'sin contestar', hora: 'ayer 21:08' },
+  { nombre: 'Carlos Frugoni',   fuente: 'meta',   campaign: 'Reactivación',  estado: 'agendó',    hora: 'ayer 18:44' },
+  { nombre: 'Sergio Ledesma',   fuente: 'google', campaign: 'Promo sábados', estado: 'sin contestar', hora: 'ayer 16:20' },
+];
+
+// Reseñas de Google Maps (cada una puede tener respuesta auto o pendiente)
+export const RESENIAS = [
+  { id: 'r1', autor: 'Federico M.',  estrellas: 5, fecha: 'hoy',     texto: 'Excelente atención, Mati corta brutal. Recomendado 100%.', respuesta: 'auto', respIA: '¡Gracias Federico! Nos hacés el día. Te esperamos siempre 🙌', sentimiento: 'positivo' },
+  { id: 'r2', autor: 'Joaquín P.',   estrellas: 5, fecha: 'ayer',    texto: 'El mejor fade de Pocitos. Siempre puntuales.', respuesta: 'auto', respIA: '¡Gracias Joaquín! Nos pone re contentos leer esto.', sentimiento: 'positivo' },
+  { id: 'r3', autor: 'Diego C.',     estrellas: 3, fecha: '2 días',  texto: 'Buen corte pero esperé 20 min más de lo agendado.', respuesta: 'pendiente', respIA: 'Hola Diego, lamentamos la espera del sábado. Si querés escribinos por WA y te invitamos una barba la próxima.', sentimiento: 'mixto' },
+  { id: 'r4', autor: 'Lucas R.',     estrellas: 5, fecha: '3 días',  texto: 'Top. Seba sabe lo que hace.', respuesta: 'auto', respIA: '¡Gracias Lucas! Le pasamos el mensaje a Seba 🙏', sentimiento: 'positivo' },
+  { id: 'r5', autor: 'Andrés B.',    estrellas: 4, fecha: '5 días',  texto: 'Buen lugar, lindo ambiente. Subiría un poco la temperatura del local.', respuesta: 'auto', respIA: '¡Gracias por la sugerencia Andrés! Lo tenemos anotado.', sentimiento: 'mixto' },
+  { id: 'r6', autor: 'Maxi P.',      estrellas: 5, fecha: '1 sem',   texto: 'Recomendado.', respuesta: 'auto', respIA: '¡Gracias Maxi!', sentimiento: 'positivo' },
 ];

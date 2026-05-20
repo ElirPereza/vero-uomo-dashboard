@@ -1,0 +1,134 @@
+/* Cuponeras */
+
+.cup-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+
+.cup-card {
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-family: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: default;
+}
+.cup-card.is-inactive {
+  opacity: .7;
+}
+
+.cup-card-hd {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+.cup-card-title {
+  font-size: var(--fs-md);
+  font-weight: 600;
+  letter-spacing: -0.005em;
+}
+.cup-card-sv {
+  font-size: var(--fs-xs);
+  color: var(--fg-muted);
+  margin-top: 2px;
+}
+
+.cup-card-deal {
+  display: grid;
+  grid-template-columns: auto 1fr 1fr;
+  gap: 14px;
+  align-items: center;
+  padding: 12px;
+  background: var(--bg-soft);
+  border-radius: var(--radius-md);
+}
+.cup-deal-pill {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  padding: 6px 12px;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+}
+.cup-deal-include {
+  font-size: var(--fs-xl);
+  letter-spacing: -0.02em;
+  color: var(--fg);
+}
+.cup-deal-sep {
+  font-size: var(--fs-sm);
+  color: var(--fg-muted);
+  font-weight: 500;
+}
+.cup-deal-pay {
+  font-size: var(--fs-md);
+  color: var(--accent);
+  letter-spacing: -0.01em;
+}
+.cup-deal-pay-info, .cup-deal-save {
+  display: flex; flex-direction: column; gap: 1px;
+}
+.cup-deal-pay-info .mono, .cup-deal-save .mono { font-size: var(--fs-sm); }
+
+.cup-card-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.cup-card-stats > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.cup-stat-val {
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.cup-stat-lbl {
+  font-size: var(--fs-xxs);
+  color: var(--fg-muted);
+}
+
+.cup-card-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+}
+
+/* Card "Nueva cuponera" */
+.cup-card-new {
+  border: 1px dashed var(--border-strong);
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 240px;
+  color: var(--fg-soft);
+}
+.cup-card-new:hover {
+  background: var(--bg-soft);
+  color: var(--fg);
+  border-color: var(--accent);
+}
+.cup-new-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: var(--bg-soft);
+  color: var(--fg-soft);
+}

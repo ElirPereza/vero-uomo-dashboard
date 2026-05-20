@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { IconTrend, IconTrendD, IconArrowR, IconBot, IconSparkle } from '../icons';
+import { IconTrend, IconTrendD, IconArrowR, IconBot, IconSparkle, IconCheck, IconCash } from '../icons';
 import { METRICAS, BARBEROS, SERVICIOS, FMT_UYU } from '../data';
 import { Avatar, PageHeader } from '../shell';
 
@@ -59,6 +59,117 @@ function MetricStat({ label, value, prev, formatPct, formatMoney, deltaInvert })
           <span className="vs">vs mes anterior</span>
         </div>
       )}
+    </div>
+  );
+}
+
+function LiquidacionPanel() {
+  const barberoById = Object.fromEntries(BARBEROS.map((b) => [b.id, b]));
+
+  // Calculo liquidación por barbero. Modelo: la barbería retiene barb.arrend%
+  // como arrendamiento; el barbero recibe el resto.
+  const rows = METRICAS.porBarbero.map((b) => {
+    const barb = barberoById[b.id];
+    const facturado = b.ingresos;
+    const arrendPct = barb.arrend;
+    const arrendamiento = Math.round(facturado * arrendPct / 100);
+    const netoBarbero = facturado - arrendamiento;
+    return { ...b, barb, facturado, arrendPct, arrendamiento, netoBarbero };
+  });
+
+  const totalFacturado = rows.reduce((s, r) => s + r.facturado, 0);
+  const totalArrend = rows.reduce((s, r) => s + r.arrendamiento, 0);
+  const totalNeto = rows.reduce((s, r) => s + r.netoBarbero, 0);
+  const cobrado = Math.round(totalArrend * 0.78); // 78% ya cobrado este mes
+  const pendiente = totalArrend - cobrado;
+
+  return (
+    <div className="card liquidacion-card" style={{ marginTop: 16 }}>
+      <div className="card-hd">
+        <div>
+          <div>Liquidación de arrendamiento</div>
+          <div className="text-xxs muted">Cada barbero abona el {rows.find(r => r.arrendPct > 0)?.arrendPct}% de su facturación como arrendamiento del espacio.</div>
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="seg-control">
+            <button>Semana</button>
+            <button className="is-active">Mes</button>
+            <button>Año</button>
+          </span>
+          <button className="btn sm">Generar recibo</button>
+        </div>
+      </div>
+
+      {/* Totales */}
+      <div className="liq-totales">
+        <div className="liq-tot">
+          <div className="liq-tot-lbl">Facturación total</div>
+          <div className="liq-tot-val mono">{FMT_UYU(totalFacturado)}</div>
+        </div>
+        <div className="liq-tot liq-tot-primary">
+          <div className="liq-tot-lbl">A cobrar a barberos · {FMT_UYU(totalArrend)}</div>
+          <div className="liq-tot-bar">
+            <span className="liq-tot-bar-fill" style={{ width: (cobrado / totalArrend * 100) + '%' }} />
+          </div>
+          <div className="liq-tot-bar-legend">
+            <span><IconCheck size={11} sw={2.4} color="var(--ok)" /> Cobrado <b className="mono">{FMT_UYU(cobrado)}</b></span>
+            <span>Pendiente <b className="mono" style={{ color: 'var(--warn)' }}>{FMT_UYU(pendiente)}</b></span>
+          </div>
+        </div>
+        <div className="liq-tot">
+          <div className="liq-tot-lbl">Neto para barberos</div>
+          <div className="liq-tot-val mono">{FMT_UYU(totalNeto)}</div>
+        </div>
+      </div>
+
+      {/* Tabla por barbero */}
+      <div className="liq-table-hd">
+        <span>Barbero</span>
+        <span style={{ textAlign: 'right' }}>Facturado</span>
+        <span style={{ textAlign: 'center' }}>% Arrend.</span>
+        <span style={{ textAlign: 'right' }}>A cobrar a la casa</span>
+        <span style={{ textAlign: 'right' }}>Neto barbero</span>
+        <span style={{ textAlign: 'center' }}>Estado</span>
+        <span></span>
+      </div>
+      <div className="row-list">
+        {rows.map((r) => {
+          const esDueno = r.arrendPct === 0;
+          // Mock: el más viejo aún no liquidó este mes
+          const pagado = !esDueno && r.id !== 'leo';
+          return (
+            <div className="row liq-row" key={r.id}>
+              <div className="flex items-center gap-3">
+                <Avatar initials={r.barb.inicial} color={r.barb.color} />
+                <div>
+                  <div className="text-sm fw-500">{r.barb.apodo}</div>
+                  <div className="text-xxs muted">{r.barb.rol}</div>
+                </div>
+              </div>
+              <div className="mono text-sm" style={{ textAlign: 'right' }}>{FMT_UYU(r.facturado)}</div>
+              <div className="text-xs mono" style={{ textAlign: 'center', color: esDueno ? 'var(--fg-muted)' : 'var(--fg-soft)' }}>
+                {esDueno ? '—' : r.arrendPct + '%'}
+              </div>
+              <div className="mono text-sm fw-600" style={{ textAlign: 'right' }}>
+                {esDueno ? <span className="muted">—</span> : FMT_UYU(r.arrendamiento)}
+              </div>
+              <div className="mono text-sm" style={{ textAlign: 'right' }}>{FMT_UYU(r.netoBarbero)}</div>
+              <div style={{ textAlign: 'center' }}>
+                {esDueno
+                  ? <span className="tag outline">dueño</span>
+                  : pagado
+                    ? <span className="tag ok"><IconCheck size={10} sw={2.4} />pagado</span>
+                    : <span className="tag warn"><span className="dot" />pendiente</span>
+                }
+              </div>
+              <div style={{ textAlign: 'right' }}>
+                {!esDueno && !pagado && <button className="btn sm">Marcar cobrado</button>}
+                {!esDueno && pagado && <button className="btn ghost sm">Ver recibo</button>}
+              </div>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -175,6 +286,9 @@ export function ViewMetricas() {
           </div>
         </div>
       </div>
+
+      {/* Liquidación de arrendamiento — modelo 60/40 pedido por Camilo */}
+      <LiquidacionPanel />
 
       <div className="grid-3" style={{ marginTop: 16 }}>
         <div className="card stat" style={{ borderColor: 'rgba(124,58,237,.25)' }}>

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { IconBot, IconSparkle, IconCheck, IconPlus, IconDots, IconScissors, IconHash, IconClock, IconWA, IconIG } from '../icons';
+import { IconBot, IconSparkle, IconCheck, IconPlus, IconDots, IconScissors, IconHash, IconClock, IconWA, IconIG, IconTicket, IconMegaphone, IconChart } from '../icons';
 import { BARBEROS, SERVICIOS, FMT_UYU } from '../data';
 import { Avatar, PageHeader } from '../shell';
 
@@ -111,13 +111,18 @@ function CfgEquipo() {
   return (
     <div className="card">
       <div className="card-hd">
-        <span>Barberos ({BARBEROS.length})</span>
+        <div>
+          <span>Barberos ({BARBEROS.length})</span>
+          <div className="text-xxs muted">
+            Modelo: alquiler de espacio. Cada barbero abona un % de su facturación como arrendamiento.
+          </div>
+        </div>
         <button className="btn sm"><IconPlus size={12} /> Agregar barbero</button>
       </div>
       <div className="cli-table-hd" style={{ gridTemplateColumns: '2fr 1.2fr 1fr 1fr 60px' }}>
         <span>Barbero</span>
         <span>Rol</span>
-        <span>Comisión</span>
+        <span>Arrendamiento</span>
         <span>Estado</span>
         <span></span>
       </div>
@@ -132,7 +137,9 @@ function CfgEquipo() {
               </div>
             </div>
             <div className="text-sm">{b.rol}</div>
-            <div className="mono text-sm">{i === 0 ? '—' : '50%'}</div>
+            <div className="mono text-sm">
+              {b.arrend === 0 ? <span className="muted">— (dueño)</span> : b.arrend + '%'}
+            </div>
             <div><span className="tag ok"><span className="dot" />activo</span></div>
             <div><button className="icon-btn"><IconDots size={14} /></button></div>
           </div>
@@ -248,6 +255,69 @@ function CfgCanales() {
   );
 }
 
+function CfgModulos() {
+  return (
+    <div className="grid-2" style={{ alignItems: 'start' }}>
+      <div className="card">
+        <div className="card-hd">
+          <span>Módulos activos</span>
+          <div className="text-xxs muted">Ocultá lo que no usás</div>
+        </div>
+        <div className="text-xs soft" style={{ padding: '12px 16px 0' }}>
+          Camilo pidió poder esconder secciones que no aplican a su modelo. Los toggles
+          también están disponibles en el panel <b>Tweaks</b> (arriba a la derecha) para previsualizar
+          el efecto en vivo.
+        </div>
+        <div className="cfg-rows">
+          <CfgRow label={<span className="flex items-center gap-2"><IconChart size={13} /> Métricas</span>}
+                  hint="Dashboard de KPIs, liquidación y performance.">
+            <Switch on={true} />
+          </CfgRow>
+          <CfgRow label={<span className="flex items-center gap-2"><IconTicket size={13} /> Cuponeras</span>}
+                  hint="Paquetes prepagos con descuento.">
+            <Switch on={true} />
+          </CfgRow>
+          <CfgRow label={<span className="flex items-center gap-2"><IconMegaphone size={13} /> Marketing</span>}
+                  hint="Campañas Google/Meta, leads y reseñas.">
+            <Switch on={true} />
+          </CfgRow>
+          <CfgRow label="Sueldos y comisiones"
+                  hint="No aplica a tu modelo (alquiler de espacios). Renombrado como 'Arrendamiento'.">
+            <Switch on={false} />
+          </CfgRow>
+        </div>
+      </div>
+
+      <div className="card">
+        <div className="card-hd">
+          <div className="flex items-center gap-2">
+            <IconBot size={14} color="var(--agent)" />
+            <span>Integraciones próximas</span>
+          </div>
+        </div>
+        <div className="cfg-rows">
+          <CfgRow label="Chatbot en página web"
+                  hint="Conversaciones directas con IA, sin pasar por Telegram.">
+            <span className="tag outline">próximo</span>
+          </CfgRow>
+          <CfgRow label="CRM externo"
+                  hint="Migración de base de datos existente.">
+            <span className="tag outline">en evaluación</span>
+          </CfgRow>
+          <CfgRow label="Facturación electrónica"
+                  hint="Camilo prefiere mantenerlo aparte; solo registramos cobros.">
+            <span className="tag">no aplicable</span>
+          </CfgRow>
+          <CfgRow label="Multi-sucursal"
+                  hint="Producto SaaS para otras barberías (roadmap).">
+            <span className="tag outline">roadmap</span>
+          </CfgRow>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function CfgNegocio() {
   return (
     <div className="card" style={{ maxWidth: 720 }}>
@@ -258,6 +328,18 @@ function CfgNegocio() {
         <CfgRow label="Teléfono"><input className="input" defaultValue="+598 99 412 853" /></CfgRow>
         <CfgRow label="Moneda"><select className="select"><option>UYU · Peso uruguayo</option></select></CfgRow>
         <CfgRow label="Zona horaria"><select className="select"><option>America/Montevideo (UTC-3)</option></select></CfgRow>
+        <CfgRow label="Modelo de negocio"
+                hint="Define cómo se calcula la liquidación con los barberos.">
+          <select className="select" defaultValue="alquiler">
+            <option value="alquiler">Alquiler de espacio (% por facturación)</option>
+            <option value="empleado">Empleados con sueldo + comisión</option>
+            <option value="freelance">Freelance puro (100% al barbero)</option>
+          </select>
+        </CfgRow>
+        <CfgRow label="% por defecto de arrendamiento"
+                hint="Se aplica a los barberos nuevos. Editable individualmente.">
+          <input className="input" defaultValue="60" style={{ width: 80 }} />
+        </CfgRow>
       </div>
     </div>
   );
@@ -272,6 +354,7 @@ export function ViewConfig() {
     { id: 'servicios', label: 'Servicios' },
     { id: 'horarios',  label: 'Horarios' },
     { id: 'canales',   label: 'Canales' },
+    { id: 'modulos',   label: 'Módulos' },
     { id: 'negocio',   label: 'Negocio' },
   ];
 
@@ -300,6 +383,7 @@ export function ViewConfig() {
         {tab === 'servicios' && <CfgServicios />}
         {tab === 'horarios'  && <CfgHorarios />}
         {tab === 'canales'   && <CfgCanales />}
+        {tab === 'modulos'   && <CfgModulos />}
         {tab === 'negocio'   && <CfgNegocio />}
       </div>
     </div>

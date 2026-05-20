@@ -7,6 +7,8 @@ import { ViewAgenda } from './views/agenda';
 import { ViewClientes } from './views/clientes';
 import { ViewMetricas } from './views/metricas';
 import { ViewConfig } from './views/config';
+import { ViewCuponeras } from './views/cuponeras';
+import { ViewMarketing } from './views/marketing';
 import './styles.css';
 import './views/hoy.css';
 import './views/inbox.css';
@@ -14,6 +16,8 @@ import './views/agenda.css';
 import './views/clientes.css';
 import './views/metricas.css';
 import './views/config.css';
+import './views/cuponeras.css';
+import './views/marketing.css';
 
 // App root — router + theme + tweaks
 
@@ -23,7 +27,10 @@ const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
   "font": "inter",
   "density": "balanceada",
   "dark": false,
-  "radius": "md"
+  "radius": "md",
+  "mod_metricas": true,
+  "mod_cuponeras": true,
+  "mod_marketing": true
 }/*EDITMODE-END*/;
 
 const FONT_MAP = {
@@ -86,9 +93,26 @@ export default function App() {
   const [t, setTweak] = useTweaks(TWEAK_DEFAULTS);
   const [view, setView] = useState('hoy');
 
+  const modules = {
+    metricas:  t.mod_metricas,
+    cuponeras: t.mod_cuponeras,
+    marketing: t.mod_marketing,
+  };
+
+  // Si el módulo activo se oculta, volver a Hoy
+  useEffect(() => {
+    if ((view === 'metricas' && !modules.metricas) ||
+        (view === 'cuponeras' && !modules.cuponeras) ||
+        (view === 'marketing' && !modules.marketing)) {
+      setView('hoy');
+    }
+  }, [t.mod_metricas, t.mod_cuponeras, t.mod_marketing]);
+
   const titleMap = {
     hoy: 'Hoy', inbox: 'Inbox', agenda: 'Agenda',
-    clientes: 'Clientes', metricas: 'Métricas', config: 'Configuración',
+    clientes: 'Clientes', metricas: 'Métricas',
+    cuponeras: 'Cuponeras', marketing: 'Marketing',
+    config: 'Configuración',
   };
 
   const Views = {
@@ -97,6 +121,8 @@ export default function App() {
     agenda: ViewAgenda,
     clientes: ViewClientes,
     metricas: ViewMetricas,
+    cuponeras: ViewCuponeras,
+    marketing: ViewMarketing,
     config: ViewConfig,
   };
   const View = Views[view];
@@ -106,16 +132,34 @@ export default function App() {
     <>
       <ThemeBridge tweaks={t} />
       <div className="app" data-screen-label={titleMap[view]}>
-        <Sidebar view={view} setView={setView} brandFont={brandFont} />
+        <Sidebar view={view} setView={setView} brandFont={brandFont} modules={modules} />
         <main className="main">
           <Topbar crumbs={['Vero Uomo', titleMap[view]]} />
           <div className="content">
-            <View />
+            <View setView={setView} />
           </div>
         </main>
       </div>
 
       <TweaksPanel title="Tweaks">
+        <TweakSection label="Módulos">
+          <TweakToggle
+            label="Métricas"
+            value={t.mod_metricas}
+            onChange={(v) => setTweak('mod_metricas', v)}
+          />
+          <TweakToggle
+            label="Cuponeras"
+            value={t.mod_cuponeras}
+            onChange={(v) => setTweak('mod_cuponeras', v)}
+          />
+          <TweakToggle
+            label="Marketing"
+            value={t.mod_marketing}
+            onChange={(v) => setTweak('mod_marketing', v)}
+          />
+        </TweakSection>
+
         <TweakSection label="Apariencia">
           <TweakColor
             label="Acento"

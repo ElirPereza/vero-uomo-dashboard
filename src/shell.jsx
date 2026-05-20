@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { IconHome, IconInbox, IconCalendar, IconUsers, IconChart, IconCog, IconSearch, IconBell, IconPlus, IconBot } from './icons';
+import { IconHome, IconInbox, IconCalendar, IconUsers, IconChart, IconCog, IconSearch, IconBell, IconPlus, IconBot, IconTicket, IconMegaphone } from './icons';
 
 // Shell — Sidebar + Topbar + layout chrome
 
@@ -22,15 +22,20 @@ export function NavItem({ icon: Icon, label, active, count, onClick }) {
   );
 }
 
-export function Sidebar({ view, setView, brandFont }) {
-  const items = [
-    { key: 'hoy',     label: 'Hoy',         icon: IconHome,     count: 19 },
-    { key: 'inbox',   label: 'Inbox',       icon: IconInbox,    count: 4 },
-    { key: 'agenda',  label: 'Agenda',      icon: IconCalendar },
-    { key: 'clientes',label: 'Clientes',    icon: IconUsers },
-    { key: 'metricas',label: 'Métricas',    icon: IconChart },
-    { key: 'config',  label: 'Configuración', icon: IconCog },
+export function Sidebar({ view, setView, brandFont, modules }) {
+  const itemsOp = [
+    { key: 'hoy',      label: 'Hoy',      icon: IconHome,     count: 19 },
+    { key: 'inbox',    label: 'Inbox',    icon: IconInbox,    count: 4 },
+    { key: 'agenda',   label: 'Agenda',   icon: IconCalendar },
+    { key: 'clientes', label: 'Clientes', icon: IconUsers },
   ];
+  const itemsNeg = [
+    { key: 'metricas',  label: 'Métricas',  icon: IconChart,     show: modules.metricas },
+    { key: 'cuponeras', label: 'Cuponeras', icon: IconTicket,    show: modules.cuponeras },
+    { key: 'marketing', label: 'Marketing', icon: IconMegaphone, show: modules.marketing },
+    { key: 'config',    label: 'Configuración', icon: IconCog,   show: true },
+  ].filter((it) => it.show);
+
   return (
     <aside className="sidebar">
       <div className="brand" style={{ fontFamily: brandFont }}>
@@ -42,12 +47,12 @@ export function Sidebar({ view, setView, brandFont }) {
       </div>
 
       <div className="sb-section-label">Operación</div>
-      {items.slice(0, 4).map((it) => (
+      {itemsOp.map((it) => (
         <NavItem key={it.key} {...it} active={view === it.key} onClick={() => setView(it.key)} />
       ))}
 
       <div className="sb-section-label">Negocio</div>
-      {items.slice(4).map((it) => (
+      {itemsNeg.map((it) => (
         <NavItem key={it.key} {...it} active={view === it.key} onClick={() => setView(it.key)} />
       ))}
 

@@ -1,0 +1,85 @@
+/* Marketing */
+
+.mkt-plat-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px; height: 28px;
+  border-radius: var(--radius-sm);
+  color: #fff;
+  font-weight: 700;
+  font-size: 12px;
+  flex-shrink: 0;
+}
+.mkt-plat-dot {
+  display: inline-block;
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.mkt-camp-table-hd,
+.mkt-camp-row {
+  display: grid !important;
+  grid-template-columns: 2.2fr 0.9fr 0.9fr 1fr 1fr 1.2fr 0.7fr 80px;
+  gap: 12px;
+  align-items: center;
+}
+.mkt-camp-table-hd {
+  padding: 10px 16px;
+  background: var(--bg-soft);
+  font-size: var(--fs-xxs);
+  color: var(--fg-soft);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+  border-bottom: 1px solid var(--border);
+}
+
+.text-right { text-align: right; }
+
+/* ── Reseñas ──────────────────────────────────────────── */
+
+.mkt-resenas {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mkt-resena {
+  padding: 12px;
+  border-radius: var(--radius-md);
+  background: var(--bg-soft);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mkt-resena-hd {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.mkt-stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 1px;
+}
+
+.mkt-resena-body {
+  color: var(--fg);
+  font-style: italic;
+  line-height: 1.45;
+}
+
+.mkt-resena-resp {
+  background: var(--bg-elev);
+  border-left: 2px solid var(--agent);
+  padding: 8px 10px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.mkt-resena-resp.is-pending {
+  border-left-color: var(--warn);
+}

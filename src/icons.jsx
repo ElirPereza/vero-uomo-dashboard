@@ -33,7 +33,19 @@ export const IconScissors = _I(<><circle cx="6" cy="6" r="3" /><circle cx="6" cy
 export const IconFilter   = _I(<><path d="M3 5h18l-7 9v6l-4-2v-4z" /></>);
 export const IconDots     = _I(<><circle cx="6" cy="12" r="1.2" fill="currentColor" stroke="none" /><circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none" /><circle cx="18" cy="12" r="1.2" fill="currentColor" stroke="none" /></>);
 export const IconCommand  = _I(<><rect x="6" y="6" width="12" height="12" rx="1.5" /></>);
-export const IconStar     = _I(<><path d="m12 3 2.6 5.8 6.4.7-4.8 4.3 1.4 6.2L12 17l-5.6 3 1.4-6.2L3 9.5l6.4-.7z" /></>);
+export const IconStar     = (props) => (
+  <svg width={props.size || 16} height={props.size || 16} viewBox="0 0 24 24"
+       fill={props.filled ? (props.color || 'currentColor') : 'none'}
+       stroke={props.color || 'currentColor'}
+       strokeWidth={props.sw || 1.6} strokeLinecap="round" strokeLinejoin="round"
+       aria-hidden="true">
+    <path d="m12 3 2.6 5.8 6.4.7-4.8 4.3 1.4 6.2L12 17l-5.6 3 1.4-6.2L3 9.5l6.4-.7z" />
+  </svg>
+);
+export const IconPlay     = _I(<><path d="M7 4v16l13-8z" /></>);
+export const IconPause    = _I(<><rect x="6" y="4" width="4" height="16" rx="1" /><rect x="14" y="4" width="4" height="16" rx="1" /></>);
+export const IconTicket   = _I(<><path d="M3 9V7a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-2a2 2 0 0 0 0-4z" /><path d="M12 5v3M12 11v2M12 16v3" /></>);
+export const IconMegaphone= _I(<><path d="M3 11v2a2 2 0 0 0 2 2h2v-6H5a2 2 0 0 0-2 2z" /><path d="M7 9 19 4v16L7 15" /><path d="M9 15v4a2 2 0 0 0 4 0v-3" /></>);
 export const IconFlag     = _I(<><path d="M5 21V4M5 4h11l-2 4 2 4H5" /></>);
 export const IconCash     = _I(<><rect x="3" y="6" width="18" height="12" rx="2" /><circle cx="12" cy="12" r="2.5" /><path d="M7 12h.01M17 12h.01" /></>);
 export const IconPaper    = _I(<><path d="M22 12a10 10 0 1 1-3.5-7.6L22 2v6h-6" /></>);
