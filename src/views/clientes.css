@@ -1,5 +1,19 @@
 /* Clientes */
 
+.cli-ficha { padding: 12px 16px; border-top: 1px solid var(--border); }
+.cli-ficha-hd { display: flex; align-items: center; gap: 6px; font-size: var(--fs-xxs); font-weight: 600; color: var(--agent); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 8px; }
+.cli-ficha-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; padding: 4px 0; font-size: var(--fs-xs); }
+.cli-ficha-row > span { color: var(--fg-muted); flex-shrink: 0; }
+.cli-ficha-row > b { font-weight: 500; text-align: right; min-width: 0; word-break: break-word; }
+.cli-sect-lbl { font-size: var(--fs-xxs); text-transform: uppercase; letter-spacing: .06em; font-weight: 600; color: var(--fg-muted); margin-bottom: 8px; }
+.cli-grupos { display: flex; flex-wrap: wrap; gap: 6px; }
+.cli-grupo-chip {
+  display: inline-flex; align-items: center; gap: 4px;
+  border: 1px solid var(--border-strong); background: transparent;
+  font-family: inherit; font-size: var(--fs-xxs); font-weight: 600; cursor: pointer;
+  padding: 3px 9px; border-radius: var(--radius-pill);
+}
+
 .cli-shell {
   display: grid;
   grid-template-columns: minmax(0, 1fr) 340px;
