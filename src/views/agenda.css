@@ -856,3 +856,88 @@
   box-shadow: 0 0 0 0 var(--accent);
   animation: ag-pulse 1.6s ease-out infinite;
 }
+
+/* ═══════════════════════ Interactividad: cobro, notas, bloqueos ═══════════ */
+
+/* Cuponera alert */
+.ag-cup-alert { margin-bottom: 14px; }
+
+/* Layout con panel de notas */
+.ag-body { display: flex; gap: 14px; flex: 1; min-height: 0; }
+.ag-body-main { flex: 1; min-width: 0; display: flex; flex-direction: column; min-height: 0; }
+.ag-body-main > .ag-kanban,
+.ag-body-main > .ag-grid { margin-bottom: var(--gap-4); }
+
+/* Botón Cobrar (en tarjetas) */
+.ag-kcard-action { margin-top: 6px; }
+.ag-cobrar-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 5px;
+  border: 1px solid var(--accent); background: var(--accent-weak); color: var(--accent);
+  font-family: inherit; font-size: 11px; font-weight: 600; cursor: pointer;
+  padding: 4px 10px; border-radius: var(--radius-sm);
+}
+.ag-cobrar-btn:hover { background: var(--accent); color: #fff; }
+.ag-cobrar-btn.full { width: 100%; }
+.ag-cobrado-tag {
+  display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+  font-size: 11px; font-weight: 600; color: var(--ok);
+  background: var(--ok-weak); border-radius: var(--radius-sm); padding: 4px 10px;
+}
+.ag-cobrado-tag.full { width: 100%; }
+
+/* Acción cobrar en evento de cronograma (hover) */
+.ag-ev-actions { margin-top: 5px; }
+.ag-ev-actions .ag-cobrar-btn { padding: 5px 10px; }
+
+/* Bloqueo card (kanban) */
+.ag-blk-card {
+  display: flex; align-items: center; gap: 8px;
+  background: repeating-linear-gradient(135deg, var(--bg-soft), var(--bg-soft) 6px, var(--bg) 6px, var(--bg) 12px);
+  border: 1px dashed var(--border-strong); border-radius: var(--radius-sm);
+  padding: 7px 9px;
+}
+.ag-blk-ic {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 20px; height: 20px; border-radius: 4px; background: var(--fg-faint); color: var(--bg); flex-shrink: 0;
+}
+.ag-blk-main { flex: 1; min-width: 0; }
+.ag-blk-motivo { font-size: 12px; font-weight: 600; color: var(--fg-soft); }
+.ag-blk-sub { font-size: 10px; color: var(--fg-muted); }
+.ag-blk-x { border: 0; background: transparent; color: var(--fg-muted); cursor: pointer; display: inline-flex; padding: 3px; border-radius: 4px; }
+.ag-blk-x:hover { background: var(--bg-active); color: var(--fg); }
+
+/* Bloqueo overlay (cronograma) */
+.ag-ev-blk {
+  position: absolute; left: 4px; right: 4px;
+  display: flex; align-items: center; gap: 5px;
+  padding: 0 8px;
+  background: repeating-linear-gradient(135deg, var(--bg-soft), var(--bg-soft) 6px, var(--bg-elev) 6px, var(--bg-elev) 12px);
+  border: 1px dashed var(--border-strong); border-radius: var(--radius-sm);
+  color: var(--fg-muted); font-size: 10px; font-weight: 600;
+  z-index: 5;
+}
+
+/* ── Panel de notas del equipo ────────────────────────────── */
+.ag-notas {
+  width: 290px; flex-shrink: 0;
+  display: flex; flex-direction: column; min-height: 0;
+  background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  margin-bottom: var(--gap-4); overflow: hidden;
+}
+.ag-notas-hd {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 11px 10px 11px 14px; border-bottom: 1px solid var(--border);
+}
+.ag-notas-title { display: inline-flex; align-items: center; gap: 7px; font-size: var(--fs-sm); font-weight: 600; color: var(--agent); }
+.ag-notas-add { padding: 12px 14px; border-bottom: 1px solid var(--border); display: flex; flex-direction: column; gap: 8px; }
+.ag-notas-add .btn { width: 100%; justify-content: center; }
+.ag-notas-list { flex: 1; min-height: 0; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+.ag-nota {
+  background: var(--bg); border: 1px solid var(--border); border-left: 3px solid var(--agent);
+  border-radius: var(--radius-sm); padding: 9px 10px;
+}
+.ag-nota-txt { font-size: var(--fs-xs); color: var(--fg); line-height: 1.4; }
+.ag-nota-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 6px; }
+.ag-nota-meta { font-size: 10px; color: var(--fg-muted); }
+.ag-nota-x { border: 0; background: transparent; color: var(--fg-muted); cursor: pointer; display: inline-flex; padding: 2px; border-radius: 4px; }
+.ag-nota-x:hover { background: var(--danger-weak); color: var(--danger); }
