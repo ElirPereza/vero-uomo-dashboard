@@ -1,5 +1,12 @@
 /* Marketing */
 
+.mkt-wa-tpl {
+  text-align: left; border: 1px solid var(--border); background: var(--bg);
+  border-radius: var(--radius-sm); padding: 8px 10px; cursor: pointer;
+  font-family: inherit; font-size: var(--fs-xs); color: var(--fg-soft); line-height: 1.4;
+}
+.mkt-wa-tpl:hover { border-color: var(--accent); color: var(--fg); background: var(--accent-weak); }
+
 .mkt-plat-badge {
   display: inline-flex;
   align-items: center;
