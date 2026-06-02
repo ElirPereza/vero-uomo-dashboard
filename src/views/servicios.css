@@ -1,0 +1,23 @@
+/* Servicios y productos */
+.sv-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+.sv-card {
+  display: flex; align-items: center; gap: 12px;
+  background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  padding: 14px 16px;
+}
+.sv-card-ic {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 34px; height: 34px; border-radius: var(--radius-sm);
+  background: var(--accent-weak); color: var(--accent); flex-shrink: 0;
+}
+.sv-promo {
+  background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  padding: 14px 16px;
+}
+.sv-promo.is-off { opacity: .62; }
+.sv-promo-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  height: 30px; padding: 0 12px; border-radius: var(--radius-sm);
+  background: var(--ok-weak); color: var(--ok); font-weight: 700; font-size: var(--fs-md);
+  font-variant-numeric: tabular-nums;
+}
