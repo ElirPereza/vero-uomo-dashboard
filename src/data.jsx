@@ -22,17 +22,25 @@ export const SERVICIOS = [
   { id: 'pack',        nombre: 'Pack completo',       dur: 60, precio: 1800 },
 ];
 
+// Ficha de cliente — la IA la completa al recepcionar: nombre, tel, email, dirección, fecha nac.
 export const CLIENTES = [
-  { id: 'c1', nombre: 'Federico Méndez',   tel: '099 412 853', visitas: 14, ult: '2 sem', tag: 'fiel',    pref: 'Fade premium · Mati' },
-  { id: 'c2', nombre: 'Joaquín Pereira',   tel: '098 221 044', visitas: 22, ult: '1 sem', tag: 'vip',     pref: 'Corte + barba · Seba' },
-  { id: 'c3', nombre: 'Diego Cabrera',     tel: '094 776 219', visitas: 3,  ult: '4 meses',tag: 'riesgo', pref: 'Corte clásico · Leo' },
-  { id: 'c4', nombre: 'Martín Olivera',    tel: '099 882 011', visitas: 8,  ult: '3 sem', tag: 'fiel',    pref: 'Pack completo · Mati' },
-  { id: 'c5', nombre: 'Pablo Acosta',      tel: '098 113 552', visitas: 1,  ult: 'hoy',   tag: 'nuevo',   pref: '—' },
-  { id: 'c6', nombre: 'Rodrigo Silveira',  tel: '094 502 388', visitas: 31, ult: '5 días',tag: 'vip',     pref: 'Diseño de barba · Seba' },
-  { id: 'c7', nombre: 'Lucas Rodríguez',   tel: '099 671 220', visitas: 5,  ult: '2 meses',tag: 'activo', pref: 'Corte clásico · Nico' },
-  { id: 'c8', nombre: 'Andrés Bermúdez',   tel: '098 309 117', visitas: 12, ult: '1 mes', tag: 'fiel',    pref: 'Fade premium · Leo' },
-  { id: 'c9', nombre: 'Bruno Tabárez',     tel: '094 226 904', visitas: 0,  ult: '—',     tag: 'nuevo',   pref: '—' },
-  { id: 'c10',nombre: 'Gonzalo Suárez',    tel: '099 558 471', visitas: 6,  ult: '5 sem', tag: 'activo', pref: 'Corte + barba · Mati' },
+  { id: 'c1', nombre: 'Federico Méndez',   tel: '099 412 853', email: 'fede.mendez@gmail.com',    direccion: 'Av. Brasil 2541, Pocitos',    nacimiento: '1991-03-12', visitas: 14, ult: '2 sem', tag: 'fiel',   pref: 'Fade premium · Mati',        notas: 'Toma el café cortado, sin azúcar. Le gusta charlar de fútbol.', grupos: ['vip-fades'] },
+  { id: 'c2', nombre: 'Joaquín Pereira',   tel: '098 221 044', email: 'joaco.pereira@gmail.com',  direccion: 'Br. España 2814, Pocitos',    nacimiento: '1988-07-29', visitas: 22, ult: '1 sem', tag: 'vip',    pref: 'Corte + barba · Seba',       notas: 'Prefiere turnos temprano (9-10h). Alérgico a ciertas lociones — usar línea sensitive.', grupos: ['vip-fades','cumple-mayo'] },
+  { id: 'c3', nombre: 'Diego Cabrera',     tel: '094 776 219', email: 'dcabrera@outlook.com',     direccion: 'Juan B. Blanco 1130, Buceo',  nacimiento: '1995-11-04', visitas: 3,  ult: '4 meses',tag: 'riesgo', pref: 'Corte clásico · Leo',        notas: 'Reactivado por el agente tras 4 meses. Sensible al precio.', grupos: ['reactivar'] },
+  { id: 'c4', nombre: 'Martín Olivera',    tel: '099 882 011', email: 'martin.olivera@gmail.com', direccion: 'Av. Sarmiento 2350, Pocitos', nacimiento: '1983-01-22', visitas: 8,  ult: '3 sem', tag: 'fiel',   pref: 'Pack completo · Mati',       notas: 'Siempre pide pack completo. Café americano.', grupos: [] },
+  { id: 'c5', nombre: 'Pablo Acosta',      tel: '098 113 552', email: 'pablo.acosta@gmail.com',   direccion: 'Rambla R. de Sáa 5520, Pocitos', nacimiento: '1999-09-17', visitas: 1, ult: 'hoy', tag: 'nuevo',   pref: '—',                          notas: 'Llegó por campaña de reactivación de Meta.', grupos: [] },
+  { id: 'c6', nombre: 'Rodrigo Silveira',  tel: '094 502 388', email: 'rodri.silveira@gmail.com', direccion: 'Chucarro 1185, Pocitos',      nacimiento: '1990-05-30', visitas: 31, ult: '5 días',tag: 'vip',    pref: 'Diseño de barba · Seba',     notas: 'Cliente desde la apertura. Barba semanal religiosa.', grupos: ['vip-fades'] },
+  { id: 'c7', nombre: 'Lucas Rodríguez',   tel: '099 671 220', email: 'lucas.rod@gmail.com',      direccion: 'Av. Rivera 3380, Pocitos',    nacimiento: '1997-12-08', visitas: 5,  ult: '2 meses',tag: 'activo', pref: 'Corte clásico · Nico',       notas: '', grupos: [] },
+  { id: 'c8', nombre: 'Andrés Bermúdez',   tel: '098 309 117', email: 'andres.b@hotmail.com',     direccion: 'Libertad 2745, Pocitos',      nacimiento: '1986-04-19', visitas: 12, ult: '1 mes', tag: 'fiel',   pref: 'Fade premium · Leo',         notas: 'Sugirió subir la temperatura del local (reseña). Café con leche.', grupos: ['cumple-mayo'] },
+  { id: 'c9', nombre: 'Bruno Tabárez',     tel: '094 226 904', email: 'bruno.tabarez@gmail.com',  direccion: 'Av. Brasil 3010, Pocitos',    nacimiento: '2001-08-25', visitas: 0,  ult: '—',     tag: 'nuevo',   pref: '—',                          notas: 'Agendado por Instagram a las 02:17. Vio el reel del fade.', grupos: [] },
+  { id: 'c10',nombre: 'Gonzalo Suárez',    tel: '099 558 471', email: 'gonza.suarez@gmail.com',   direccion: '26 de Marzo 1290, Pocitos',   nacimiento: '1993-02-14', visitas: 6,  ult: '5 sem', tag: 'activo', pref: 'Corte + barba · Mati',       notas: '', grupos: [] },
+];
+
+// Grupos de clientes — para campañas/promociones segmentadas
+export const GRUPOS_CLIENTES = [
+  { id: 'vip-fades',   nombre: 'VIP · Fades premium', color: '#0EA5E9', desc: 'Clientes recurrentes de fade premium' },
+  { id: 'cumple-mayo', nombre: 'Cumpleaños de mayo',  color: '#F59E0B', desc: 'Promo de cumpleaños del mes' },
+  { id: 'reactivar',   nombre: 'Para reactivar',      color: '#EF4444', desc: 'Sin visitar hace +3 meses' },
 ];
 
 // Turnos de "Hoy" — sábado 16 de mayo
@@ -331,4 +339,59 @@ export const RESENIAS = [
   { id: 'r4', autor: 'Lucas R.',     estrellas: 5, fecha: '3 días',  texto: 'Top. Seba sabe lo que hace.', respuesta: 'auto', respIA: '¡Gracias Lucas! Le pasamos el mensaje a Seba 🙏', sentimiento: 'positivo' },
   { id: 'r5', autor: 'Andrés B.',    estrellas: 4, fecha: '5 días',  texto: 'Buen lugar, lindo ambiente. Subiría un poco la temperatura del local.', respuesta: 'auto', respIA: '¡Gracias por la sugerencia Andrés! Lo tenemos anotado.', sentimiento: 'mixto' },
   { id: 'r6', autor: 'Maxi P.',      estrellas: 5, fecha: '1 sem',   texto: 'Recomendado.', respuesta: 'auto', respIA: '¡Gracias Maxi!', sentimiento: 'positivo' },
+];
+
+// ── Productos (retail) — stock se descuenta automáticamente al cobrar ──
+export const PRODUCTOS = [
+  { id: 'p-pomada',   nombre: 'Pomada efecto mate',      cat: 'Styling',  precio: 690,  costo: 320, stock: 18, stockMin: 6, sku: 'VU-POM-01' },
+  { id: 'p-cera',     nombre: 'Cera modeladora',         cat: 'Styling',  precio: 620,  costo: 290, stock: 4,  stockMin: 6, sku: 'VU-CER-02' },
+  { id: 'p-shampoo',  nombre: 'Shampoo anticaspa 250ml', cat: 'Cuidado',  precio: 540,  costo: 240, stock: 11, stockMin: 5, sku: 'VU-SHA-03' },
+  { id: 'p-aceite',   nombre: 'Aceite para barba 30ml',  cat: 'Barba',    precio: 750,  costo: 350, stock: 9,  stockMin: 4, sku: 'VU-ACE-04' },
+  { id: 'p-balsamo',  nombre: 'Bálsamo para barba',      cat: 'Barba',    precio: 680,  costo: 300, stock: 2,  stockMin: 4, sku: 'VU-BAL-05' },
+  { id: 'p-peine',    nombre: 'Peine de madera',         cat: 'Accesorio',precio: 380,  costo: 150, stock: 23, stockMin: 8, sku: 'VU-PEI-06' },
+  { id: 'p-locion',   nombre: 'Loción after shave',      cat: 'Cuidado',  precio: 590,  costo: 260, stock: 7,  stockMin: 5, sku: 'VU-LOC-07' },
+  { id: 'p-gift',     nombre: 'Gift card $1.500',        cat: 'Gift',     precio: 1500, costo: 0,   stock: 99, stockMin: 0, sku: 'VU-GIF-08' },
+];
+
+// Métodos de pago disponibles en el cobro
+export const METODOS_PAGO = [
+  { id: 'efectivo',  nombre: 'Efectivo',          icon: 'cash' },
+  { id: 'debito',    nombre: 'Débito',            icon: 'card' },
+  { id: 'credito',   nombre: 'Crédito',           icon: 'card' },
+  { id: 'mercadopago',nombre: 'Mercado Pago',     icon: 'qr' },
+  { id: 'transferencia', nombre: 'Transferencia', icon: 'bank' },
+  { id: 'cuponera',  nombre: 'Cuponera',          icon: 'ticket' },
+];
+
+// Gastos del salón (egresos) — para Finanzas
+export const GASTOS = [
+  { id: 'g1', fecha: '2026-05-02', categoria: 'Insumos',     concepto: 'Reposición de toallas y capas',   monto: 4200,  metodo: 'transferencia' },
+  { id: 'g2', fecha: '2026-05-04', categoria: 'Productos',   concepto: 'Compra pomadas + ceras (x24)',     monto: 8800,  metodo: 'transferencia' },
+  { id: 'g3', fecha: '2026-05-06', categoria: 'Servicios',   concepto: 'UTE — luz',                        monto: 6300,  metodo: 'debito' },
+  { id: 'g4', fecha: '2026-05-08', categoria: 'Alquiler',    concepto: 'Alquiler local mayo',              monto: 52000, metodo: 'transferencia' },
+  { id: 'g5', fecha: '2026-05-10', categoria: 'Marketing',   concepto: 'Inversión Meta Ads',               monto: 8400,  metodo: 'credito' },
+  { id: 'g6', fecha: '2026-05-12', categoria: 'Insumos',     concepto: 'Hojas, espuma, alcohol',           monto: 2950,  metodo: 'efectivo' },
+  { id: 'g7', fecha: '2026-05-14', categoria: 'Mantenimiento',concepto: 'Service máquinas de corte',       monto: 3400,  metodo: 'efectivo' },
+];
+
+// Notas del equipo — block al costado de la agenda
+export const NOTAS_EQUIPO = [
+  { id: 'n1', texto: 'Llega mercadería de pomadas el martes — recibir antes de las 11h.', autor: 'Mati', color: '#F59E0B', fecha: 'hoy' },
+  { id: 'n2', texto: 'Seba se va 17h (turno médico). Reagendar 18h de Iván.', autor: 'Seba', color: '#0EA5E9', fecha: 'hoy' },
+  { id: 'n3', texto: 'Recordar ofrecer cuponera a clientes con 9+ visitas.', autor: 'Nico', color: '#10B981', fecha: 'ayer' },
+];
+
+// Promociones (descuentos sobre servicios/productos)
+export const PROMOS = [
+  { id: 'promo1', nombre: '2x1 en cejas (martes)', tipo: 'servicio', objetivo: 'cejas', desc: 50, unidad: '%', activa: true,  vence: '30 jun 2026' },
+  { id: 'promo2', nombre: 'Combo corte + pomada',  tipo: 'combo',    objetivo: 'corte+p-pomada', desc: 250, unidad: '$', activa: true, vence: '15 jul 2026' },
+  { id: 'promo3', nombre: '-15% productos barba',  tipo: 'producto', objetivo: 'Barba', desc: 15, unidad: '%', activa: false, vence: '01 may 2026' },
+];
+
+// Ventas históricas del mes (cerradas) — alimentan Finanzas + stats por barbero.
+// Cada cobro nuevo agrega una venta más a este registro vía el store.
+export const VENTAS = [
+  { id: 'v1', fecha: '2026-05-16', hora: '09:14', clienteNombre: 'Federico Méndez', barbero: 'mati', items: [{ tipo: 'servicio', nombre: 'Fade premium', precio: 950, qty: 1 }], propina: 150, descuento: 0, total: 950, pagos: [{ metodo: 'debito', monto: 950 }], turnoId: 't1' },
+  { id: 'v2', fecha: '2026-05-16', hora: '09:42', clienteNombre: 'Joaquín Pereira', barbero: 'seba', items: [{ tipo: 'servicio', nombre: 'Corte + barba', precio: 1100, qty: 1 }, { tipo: 'producto', nombre: 'Aceite para barba 30ml', precio: 750, qty: 1 }], propina: 200, descuento: 0, total: 1850, pagos: [{ metodo: 'efectivo', monto: 1850 }], turnoId: 't2' },
+  { id: 'v3', fecha: '2026-05-16', hora: '10:20', clienteNombre: 'Rodrigo Silveira', barbero: 'seba', items: [{ tipo: 'servicio', nombre: 'Diseño de barba', precio: 550, qty: 1 }], propina: 100, descuento: 0, total: 550, pagos: [{ metodo: 'mercadopago', monto: 550 }], turnoId: 't3' },
 ];

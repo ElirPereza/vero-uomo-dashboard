@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useTweaks, TweaksPanel, TweakSection, TweakColor, TweakToggle, TweakSelect, TweakRadio } from './tweaks-panel';
 import { Sidebar, Topbar } from './shell';
+import { CobroDrawer } from './cobro';
+import { Toaster } from './ui';
 import { ViewHoy } from './views/hoy';
 import { ViewInbox } from './views/inbox';
 import { ViewAgenda } from './views/agenda';
@@ -9,6 +11,8 @@ import { ViewMetricas } from './views/metricas';
 import { ViewConfig } from './views/config';
 import { ViewCuponeras } from './views/cuponeras';
 import { ViewMarketing } from './views/marketing';
+import { ViewFinanzas } from './views/finanzas';
+import { ViewServicios } from './views/servicios';
 import './styles.css';
 import './views/hoy.css';
 import './views/inbox.css';
@@ -18,6 +22,8 @@ import './views/metricas.css';
 import './views/config.css';
 import './views/cuponeras.css';
 import './views/marketing.css';
+import './views/finanzas.css';
+import './views/servicios.css';
 
 // App root — router + theme + tweaks
 
@@ -112,6 +118,7 @@ export default function App() {
     hoy: 'Hoy', inbox: 'Inbox', agenda: 'Agenda',
     clientes: 'Clientes', metricas: 'Métricas',
     cuponeras: 'Cuponeras', marketing: 'Marketing',
+    finanzas: 'Finanzas', servicios: 'Servicios y productos',
     config: 'Configuración',
   };
 
@@ -123,6 +130,8 @@ export default function App() {
     metricas: ViewMetricas,
     cuponeras: ViewCuponeras,
     marketing: ViewMarketing,
+    finanzas: ViewFinanzas,
+    servicios: ViewServicios,
     config: ViewConfig,
   };
   const View = Views[view];
@@ -134,12 +143,15 @@ export default function App() {
       <div className="app" data-screen-label={titleMap[view]}>
         <Sidebar view={view} setView={setView} brandFont={brandFont} modules={modules} />
         <main className="main">
-          <Topbar crumbs={['Vero Uomo', titleMap[view]]} />
+          <Topbar crumbs={['Vero Uomo', titleMap[view]]} onNuevoTurno={() => setView('agenda')} />
           <div className="content">
             <View setView={setView} />
           </div>
         </main>
       </div>
+
+      <CobroDrawer />
+      <Toaster />
 
       <TweaksPanel title="Tweaks">
         <TweakSection label="Módulos">

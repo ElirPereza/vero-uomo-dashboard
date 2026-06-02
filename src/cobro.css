@@ -1,0 +1,125 @@
+/* CobroDrawer — carrito "Nuevo Cobro" */
+
+.cb-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px; }
+
+/* Ficha rápida del cliente (preferencias / gusto del café) */
+.cb-ficha {
+  display: flex; align-items: flex-start; gap: 8px;
+  padding: 9px 11px; margin-bottom: 16px;
+  background: var(--agent-weak); border-radius: var(--radius-md);
+}
+.cb-ficha-pref { font-size: var(--fs-xs); font-weight: 600; color: var(--agent); }
+.cb-ficha-nota { font-size: var(--fs-xxs); color: var(--fg-soft); line-height: 1.4; margin-top: 2px; }
+.cb-inp-icon { position: relative; display: flex; align-items: center; }
+.cb-inp-icon > svg { position: absolute; left: 10px; color: var(--fg-muted); pointer-events: none; }
+.cb-inp-icon .inp { padding-left: 32px; }
+
+/* ── Items ───────────────────────────────────────────────────────────── */
+.cb-items { display: flex; flex-direction: column; gap: 8px; }
+.cb-empty {
+  border: 1px dashed var(--border-strong); border-radius: var(--radius-sm);
+  padding: 18px; text-align: center; color: var(--fg-muted); font-size: var(--fs-xs);
+}
+.cb-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 9px 10px; border: 1px solid var(--border); border-radius: var(--radius-md);
+  background: var(--bg);
+}
+.cb-item-ic {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; border-radius: var(--radius-sm); flex-shrink: 0;
+}
+.cb-item-ic-servicio { background: var(--accent-weak); color: var(--accent); }
+.cb-item-ic-producto { background: var(--ok-weak); color: var(--ok); }
+.cb-item-main { flex: 1; min-width: 0; }
+.cb-item-name { font-size: var(--fs-sm); font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cb-item-unit { font-size: var(--fs-xxs); color: var(--fg-muted); margin-top: 1px; }
+.cb-item-sub { font-size: var(--fs-sm); font-weight: 600; min-width: 64px; text-align: right; }
+.cb-item-x {
+  border: 0; background: transparent; color: var(--fg-muted); cursor: pointer;
+  display: inline-flex; padding: 4px; border-radius: 4px; flex-shrink: 0;
+}
+.cb-item-x:hover { background: var(--danger-weak); color: var(--danger); }
+
+/* ── Add picker ──────────────────────────────────────────────────────── */
+.cb-add {
+  margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border);
+}
+.cb-add-tabs { display: flex; gap: 6px; margin-bottom: 10px; }
+.cb-add-tabs button {
+  display: inline-flex; align-items: center; gap: 5px;
+  border: 1px solid var(--border); background: var(--bg-elev); color: var(--fg-soft);
+  font-family: inherit; font-size: var(--fs-xs); font-weight: 500; cursor: pointer;
+  padding: 5px 11px; border-radius: var(--radius-pill);
+}
+.cb-add-tabs button.is-active { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.cb-search { margin-bottom: 8px; }
+.cb-search .inp { padding-left: 30px; height: 32px; }
+
+.cb-picker { display: flex; flex-direction: column; gap: 2px; max-height: 188px; overflow-y: auto; }
+.cb-pick {
+  display: flex; align-items: center; gap: 10px;
+  width: 100%; text-align: left; border: 0; background: transparent;
+  padding: 8px 10px; border-radius: var(--radius-sm); cursor: pointer;
+  font-family: inherit; color: var(--fg);
+}
+.cb-pick:hover { background: var(--bg-hover); }
+.cb-pick:disabled { opacity: .45; cursor: not-allowed; }
+.cb-pick-name { flex: 1; min-width: 0; font-size: var(--fs-sm); font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.cb-pick-meta { font-size: var(--fs-xxs); color: var(--fg-muted); }
+.cb-pick-stock { font-size: var(--fs-xxs); color: var(--fg-muted); }
+.cb-pick-stock.is-low { color: var(--warn); font-weight: 600; }
+.cb-pick-price { font-size: var(--fs-xs); font-weight: 600; color: var(--fg-soft); min-width: 56px; text-align: right; }
+.cb-pick > svg { color: var(--accent); flex-shrink: 0; }
+
+/* ── Adjust (descuento + propina) ────────────────────────────────────── */
+.cb-adjust {
+  display: grid; grid-template-columns: 1fr 1.2fr; gap: 12px;
+  margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border);
+}
+.cb-tip { display: flex; flex-direction: column; gap: 6px; }
+.cb-tip-pct { display: flex; gap: 5px; }
+.cb-tip-pct button {
+  flex: 1; border: 1px solid var(--border); background: var(--bg-elev); color: var(--fg-soft);
+  font-family: inherit; font-size: var(--fs-xxs); font-weight: 600; cursor: pointer;
+  padding: 4px 0; border-radius: var(--radius-xs);
+}
+.cb-tip-pct button:hover { background: var(--accent-weak); color: var(--accent); border-color: var(--accent); }
+
+/* ── Pagos ───────────────────────────────────────────────────────────── */
+.cb-pagos { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+.cb-pago-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.cb-pago-chip {
+  display: inline-flex; align-items: center; gap: 4px;
+  border: 1px solid var(--border-strong); background: var(--bg-elev); color: var(--fg-soft);
+  font-family: inherit; font-size: var(--fs-xs); font-weight: 500; cursor: pointer;
+  padding: 5px 11px; border-radius: var(--radius-pill);
+}
+.cb-pago-chip:hover { border-color: var(--accent); color: var(--accent); }
+.cb-pago-chip.is-on { background: var(--accent); color: #fff; border-color: var(--accent); }
+.cb-pago-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  margin-top: 8px; font-size: var(--fs-sm);
+}
+.cb-pago-row .inp { width: 120px; height: 30px; text-align: right; }
+
+/* ── Checkout (footer) ───────────────────────────────────────────────── */
+.cb-checkout { display: flex; flex-direction: column; gap: 5px; }
+.cb-totrow {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: var(--fs-sm); color: var(--fg-soft);
+}
+.cb-totrow-neg { color: var(--ok); }
+.cb-impuestos i { color: var(--fg-muted); font-style: normal; font-size: var(--fs-xxs); }
+.cb-total {
+  margin-top: 4px; padding-top: 8px; border-top: 1px solid var(--border);
+  font-size: var(--fs-lg); font-weight: 700; color: var(--fg);
+}
+.cb-total .mono { font-size: var(--fs-xl); }
+.cb-falta { font-size: var(--fs-xxs); font-weight: 600; color: var(--warn); text-align: right; }
+.cb-falta.is-vuelto { color: var(--ok); }
+.cb-cobrar {
+  width: 100%; height: 42px; margin-top: 10px; font-size: var(--fs-md); font-weight: 600;
+  justify-content: center;
+}
+.cb-cobrar:disabled { opacity: .5; cursor: not-allowed; }

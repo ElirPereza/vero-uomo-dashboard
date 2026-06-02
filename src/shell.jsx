@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import { IconHome, IconInbox, IconCalendar, IconUsers, IconChart, IconCog, IconSearch, IconBell, IconPlus, IconBot, IconTicket, IconMegaphone } from './icons';
+import { IconHome, IconInbox, IconCalendar, IconUsers, IconChart, IconCog, IconSearch, IconBell, IconPlus, IconBot, IconTicket, IconMegaphone, IconCash, IconScissors } from './icons';
 
 // Shell — Sidebar + Topbar + layout chrome
 
@@ -31,6 +31,8 @@ export function Sidebar({ view, setView, brandFont, modules }) {
   ];
   const itemsNeg = [
     { key: 'metricas',  label: 'Métricas',  icon: IconChart,     show: modules.metricas },
+    { key: 'finanzas',  label: 'Finanzas',  icon: IconCash,      show: true },
+    { key: 'servicios', label: 'Servicios', icon: IconScissors,  show: true },
     { key: 'cuponeras', label: 'Cuponeras', icon: IconTicket,    show: modules.cuponeras },
     { key: 'marketing', label: 'Marketing', icon: IconMegaphone, show: modules.marketing },
     { key: 'config',    label: 'Configuración', icon: IconCog,   show: true },
@@ -67,7 +69,7 @@ export function Sidebar({ view, setView, brandFont, modules }) {
   );
 }
 
-export function Topbar({ crumbs }) {
+export function Topbar({ crumbs, onNuevoTurno }) {
   return (
     <header className="topbar">
       <div className="crumbs">
@@ -94,7 +96,7 @@ export function Topbar({ crumbs }) {
         <IconBell size={16} />
         <span className="dot" />
       </button>
-      <button className="btn accent sm">
+      <button className="btn accent sm" onClick={onNuevoTurno}>
         <IconPlus size={13} />
         <span>Nuevo turno</span>
       </button>
