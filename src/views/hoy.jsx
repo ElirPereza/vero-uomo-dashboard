@@ -169,7 +169,7 @@ function HoyEquipo() {
   );
 }
 
-export function ViewHoy() {
+export function ViewHoy({ setView }) {
   const ahora = '10:42';
   const barberoById = Object.fromEntries(BARBEROS.map((b) => [b.id, b]));
   const ingresosHoy = TURNOS_HOY.reduce((s, t) => s + t.precio, 0);
@@ -192,8 +192,8 @@ export function ViewHoy() {
         actions={
           <>
             <button className="btn ghost sm"><IconFilter size={13} /> Filtrar</button>
-            <button className="btn sm">Ver agenda</button>
-            <button className="btn accent sm"><IconPlus size={13} /> Nuevo turno</button>
+            <button className="btn sm" onClick={() => setView && setView('agenda')}>Ver agenda</button>
+            <button className="btn accent sm" onClick={() => setView && setView('agenda')}><IconPlus size={13} /> Nuevo turno</button>
           </>
         }
       />
