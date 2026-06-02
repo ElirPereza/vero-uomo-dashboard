@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# Documento interno con costos/márgenes — NO publicar
+docs/COSTOS-Y-PRECIOS.md
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
