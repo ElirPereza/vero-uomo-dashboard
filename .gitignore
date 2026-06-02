@@ -12,8 +12,9 @@ dist
 dist-ssr
 *.local
 
-# Documento interno con costos/márgenes — NO publicar
+# Documentos con precios/márgenes — NO publicar (compartir como archivo/PDF)
 docs/COSTOS-Y-PRECIOS.md
+docs/PROPUESTA-FASES.md
 
 # Editor directories and files
 .vscode/*
